@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="Daily Financial API Test Suite">
+
+    <test name="User registration">
+        <classes>
+            <class name="testRunner.UserTestRunner"/>
+        </classes>
+    </test>
+
+
+
+
+
+</suite>
