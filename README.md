@@ -68,6 +68,44 @@ Where applicable, negative test cases were added, such as:
  ![Behaviors](https://github.com/user-attachments/assets/6566d199-c6db-4293-892d-83f4a26ad820)
 
  ---
+ ##  Pre-requisites
+
+Before running the project, make sure the following are installed:
+
+1. **Java JDK 17+**  
+    [Download JDK](https://www.oracle.com/java/technologies/javase-downloads.html)
+
+2. **Gradle**  
+    [Install Gradle](https://gradle.org/install/)
+
+3. **IntelliJ IDEA** (Recommended IDE)
+
+4. **Allure CLI (for reports)**  
+    [Install Allure](https://docs.qameta.io/allure/#_installing_a_commandline)
+
+5. **Chrome WebDriver**  
+   Ensure it's compatible with your Chrome version. Place it in your system PATH.
+
+6. **Gmail API access**  
+   Set up credentials for accessing Gmail inbox programmatically (for password/email assertions).
+   
+---
+##  Project Setup & Execution
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/nadim45448/Daily-Finance-API-Automation.git
+   ```
+    - cd DailyFinance-FullStackAutomation
+2. Configure Gmail Credentials:  
+    - Setup Gmail API token securely for reading mails.
+3. Run Tests via Gradle:
+   - gradle clean test
+4. Generate and Serve Allure Report
+   ```bash
+   allure generate allure-results --clean -o allure-report
+   allure serve allure-results
+   ```
+   ---
 
  
 
