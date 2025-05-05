@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import setup.ItemModel;
 import setup.UserModel;
+import setup.UserUpdateModel;
 
 import java.util.Properties;
 
@@ -21,7 +22,6 @@ public class UserController {
 
         return given().contentType("application/json")
                 .body(userModel)
-                .header("Authorization","Bearer "+ prop.getProperty("token"))
                 .when().post("/api/auth/register");
 
     }
@@ -52,9 +52,9 @@ public class UserController {
 
     }
 
-    public Response editUserInfo(String userid, UserModel userModel){
+    public Response editUserInfo(String userid, UserUpdateModel updateModel){
         RestAssured.baseURI= prop.getProperty("baseUrl");
-        return given().contentType("application/json").body(userModel)
+        return given().contentType("application/json").body(updateModel)
                 .header("Authorization","Bearer "+ prop.getProperty("token"))
                 .when().put("/api/user/"+ userid);
 

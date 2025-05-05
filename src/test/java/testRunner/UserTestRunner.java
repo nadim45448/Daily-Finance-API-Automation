@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import setup.ItemModel;
 import setup.Setup;
 import setup.UserModel;
+import setup.UserUpdateModel;
 import utils.Utils;
 
 public class UserTestRunner extends Setup {
@@ -73,14 +74,11 @@ public class UserTestRunner extends Setup {
         String userEmail = jsonPath.get("email");
         Utils.setEnver("userEmail", userEmail);
 
-//        String userPassword = jsonPath.get("password");
-        Utils.setEnver("userPassword", password);//...................
+        Utils.setEnver("userPassword", password);
+        Utils.setEnver("userPhoneNumber",phoneNumber);
+        Utils.setEnver("userAddress",address);
+        Utils.setEnver("gender", gender);
 
-        String userAddress = jsonPath.get("address");
-        Utils.setEnver("userAddress", address);
-
-        String userGender = jsonPath.get("gender");
-        Utils.setEnver("userGender", gender);
 
     }
 
@@ -119,8 +117,8 @@ public class UserTestRunner extends Setup {
    }
 
 
-    @Test(priority = 5, description = "Admin Login")
-    public void adminLogin() throws ConfigurationException {
+   @Test(priority = 5, description = "Admin Login")
+    public void adminLogin() throws ConfigurationException, InterruptedException {
 
         UserModel userModel = new UserModel();
         userModel.setEmail("admin@test.com");
@@ -131,6 +129,7 @@ public class UserTestRunner extends Setup {
         String token = jsonObj.get("token");
         System.out.println("token: " + token);
         Utils.setEnver("token", token);
+        Thread.sleep(2000);
 
     }
 
@@ -150,28 +149,32 @@ public class UserTestRunner extends Setup {
 
     }
 
-  // @Test(priority = 8, description = "Edit User FirstName and PhoneNumber")
+   @Test(priority = 8, description = "Edit User FirstName, lastName and PhoneNumber")
     public void editUserInfo() throws ConfigurationException {
 
-        //        UserController userController = new UserController(prop);
-        //
-        //        UserModel userModel = new UserModel();
-        //        Faker faker = new Faker();
-        ///       userModel.setFirstName(faker.name().firstName());
-        //        String firstName="ABCDEFGH";
-        //        userModel.setFirstName(firstName);
-        //        Utils.setEnver("userFirstName",firstName);
-        //
-        //        userModel.setLastName(prop.getProperty("userLastName"));
-        //        userModel.setEmail(prop.getProperty("userEmail"));
-        //        userModel.setPassword(prop.getProperty("userPassword"));
-        //        String phoneNumber = "0160" + Utils.generateRandomNumber(1000000, 9999999);
-        //        userModel.setPhoneNumber(phoneNumber);
-        //        Utils.setEnver("userPhoneNumber",phoneNumber);
-        //        userModel.setAddress(prop.getProperty("userAddress"));
-        //        userModel.setGender(prop.getProperty("userGender"));
-        //        Response responseNew = userController.editUserInfo(prop.getProperty("UserId"), userModel);
-        //        System.out.println(responseNew.asString());
+                UserUpdateModel updateModel = new UserUpdateModel();
+                String firstName="Mr";
+                updateModel.setFirstName(firstName);
+                Utils.setEnver("userFirstName",firstName);
+
+               String lastName="ABC";
+               updateModel.setLastName(lastName);
+               Utils.setEnver("userLastName",lastName);
+
+                String phoneNumber = "01603333333";
+                updateModel.setPhoneNumber(phoneNumber);
+                Utils.setEnver("userPhoneNumber",phoneNumber);
+
+                String id= prop.getProperty("UserId");
+                String email = prop.getProperty("userEmail");
+                updateModel.setEmail(email);
+                String address = prop.getProperty("userAddress");
+                updateModel.setAddress(address);
+                String gender = prop.getProperty("gender");
+                updateModel.setGender(gender);
+
+                Response responseNew = userController.editUserInfo(id, updateModel);
+                System.out.println(responseNew.asString());
 
 
 
